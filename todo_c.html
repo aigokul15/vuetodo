@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<link rel="stylesheet" href="http://localhost:7071/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="app.css" />
+</head>
+<body>
+
+<div id="todo" class="container" >
+	<div id="tasks">
+		<h1> Tasks ({{ remaining.length }}) </h1>
+		<todo-list :new-task="newTask" :tasklist="tasks" ref="newTask" ></todo-list>
+	</div>
+
+	<form v-on:submit="addTask" >
+		
+		<div class="form-group" >
+			<input v-model="newTask" 
+				   ref="newTask"
+				   class="form-control" 
+				   placeholder="I need to...">
+		</div>
+
+		<button class="btn btn-primary" >Add Task</button>
+ 	</form>
+
+
+	 <div id="completed" v-if="completions.length">
+
+	<h1> completed ({{ completions.length }}) </h1>
+	 
+	  <ol class="list-group">
+		<todo-list :new-task="newTask" :tasklist="tasks"></todo-list>
+	  </ol>
+	<button class="btn btn-danger" v-on:click="clearCompleted" >Clear Completed</button>
+ </div>
+
+</div>
+
+<script src="http://localhost:7071/js/vue.min.js"></script>
+<script src="TodoComp.js"></script>
+<script src="Todo.js"></script>
+</body>
+</html>

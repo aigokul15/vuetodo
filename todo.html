@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+</head>
+
+<body>
+
+    <div id="todo" class="container">
+        <div id="tasks" v-if="remaining.length">
+
+            <div>
+                <h1> Tasks ({{ remaining.length }}) </h1>
+
+                <ol class="list-group">
+
+                    <li v-for="(task, index) in tasks " v-if="!task.completed" class="list-group-item">
+                        <span v-on:dblclick="editTask(task, index)">{{ task.body }}</span>
+
+                        <button v-on:click="removeTask(index)">&#10007;</button>
+                        <button v-on:click="toggleTaskCompletion(task)">&#10004;</button>
+
+                    </li>
+
+
+                </ol>
+            </div>
+        </div>
+
+        <form v-on:submit="addTask">
+
+            <div class="form-group">
+                <input v-model="newTask" ref="newTask" class="form-control" placeholder="I need to...">
+            </div>
+
+            <button class="btn btn-primary">Add Task</button>
+            <button class="btn btn-default" v-on:click="markAllComplted">Mark All As Completed</button>
+        </form>
+
+
+        <div id="completed" v-if="completions.length">
+
+            <h1> completed ({{ completions.length }}) </h1>
+
+            <ol class="list-group">
+
+                <li v-for="(task, index) in tasks " v-if="task.completed" class="list-group-item">
+                    <span>{{ task.body }}</span>
+
+                    <button v-on:click="toggleTaskCompletion(task)">&#10007;</button>
+                </li>
+
+            </ol>
+            <button class="btn btn-danger" v-on:click="clearCompleted">Clear Completed</button>
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
